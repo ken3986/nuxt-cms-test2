@@ -1,4 +1,12 @@
-const { client, apiConfig } = require('../utils/microcms')
+// const { client, apiConfig } = require('../utils/microcms')
+
+const { createClient } = require('microcms-js-sdk')
+// require('dotenv').config()
+// const { API_KEY, SERVICE_DOMAIN } = process.env
+const client = createClient({
+  serviceDomain: 'teten-microcms-test',
+  apiKey: 'e2d003f42ab74ce5afef740efd29a2c41d43API_KEY',
+})
 
 exports.handler = async (event) => {
   const { q } = event.queryStringParameters
@@ -13,7 +21,7 @@ exports.handler = async (event) => {
 
   return client
     .get({
-      endpoint: apiConfig.endpoint,
+      endpoint: 'note',
       queries:  { q }
     })
     .then((data) => {
