@@ -19,6 +19,26 @@ exports.handler = async (event) => {
     }
   }
 
+  return axios
+    .get('https://' + 'teten-microcms-test'
+    + '.microcms.io/api/v1/note'
+    // + '/'
+    // + `${id}`
+    + '?'
+    + `q=${q}`, {
+      headers: { 'X-MICROCMS-API-KEY': 'e2d003f42ab74ce5afef740efd29a2c41d43' },
+    })
+    .then((data) => {
+      return {
+        statusCode: 200,
+        body: JSON.stringify(data)
+      }
+    })
+    .catch((error) => ({
+      statusCode: 400,
+      body: String(error)
+    }))
+
   return client
     .get({
       endpoint: 'note',
